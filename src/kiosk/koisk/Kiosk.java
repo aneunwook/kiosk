@@ -31,7 +31,7 @@ public class Kiosk {
 
                 if (menuNumber == 0) {
                     System.out.println("종료되었습니다!");
-                    break;
+                    return;
                 } else if (menuNumber < 1 || menuNumber > 4) {
                     throw new IndexOutOfBoundsException();
                 }

@@ -17,7 +17,6 @@ public class Main {
         menuItemList.add(cheeseburger);
         menuItemList.add(hamburger);
 
-
         Kiosk kiosk = new Kiosk(menuItemList);
 
         kiosk.start();

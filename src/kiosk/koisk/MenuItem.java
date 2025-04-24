@@ -9,5 +9,6 @@ public class MenuItem {
         this.name = name;
         this.price = price;
         this.explanation = explanation;
+
     }
 }

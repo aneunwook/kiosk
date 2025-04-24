@@ -1,6 +1,5 @@
 package kiosk.kioskLv4;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -19,10 +18,9 @@ public class Kiosk {
             System.out.println("[ MAIN MENU ]");
 
             for (int i = 0; i < menus.size(); i++) {
-                System.out.println(i + 1 + " " + menus.get(i).category);
+                System.out.println(i + 1 + " " + menus.get(i).getCategory());
             }
             System.out.println("0. 종료      | 종료");
-
 
             System.out.print("주문 번호: ");
             int menuListNumber = scanner.nextInt();
@@ -31,10 +29,9 @@ public class Kiosk {
                 return;
             }
 
-
             try {
                 System.out.println();
-                System.out.println("[ "+ menus.get(menuListNumber - 1).category.toUpperCase()+ " MENU ]");
+                System.out.println("[ "+ menus.get(menuListNumber - 1).getCategory().toUpperCase()+ " MENU ]");
 
                 if (menuListNumber >= 1 && menuListNumber <= menus.size()) {
                     for (int i = 0; i < menus.get(menuListNumber - 1).menuItemList.size(); i++) {
@@ -58,7 +55,6 @@ public class Kiosk {
                 continue;
             }
 
-
             while (true){
                 try {
                     System.out.print("음식을 선택해 주세요: ");
@@ -77,17 +73,7 @@ public class Kiosk {
                     System.out.println("숫자로 입력해 주세요!!!!!!!!!!!!!!!");
                     scanner.nextLine();
                 }
-
             }
-
-//                if (menuNumber == 0) {
-//                    System.out.println("종료되었습니다!");
-//                    return;
-//                } else if (menuNumber < 1 || menuNumber > 4) {
-//                    throw new IndexOutOfBoundsException();
-//                }
-
         }
-
     }
 }

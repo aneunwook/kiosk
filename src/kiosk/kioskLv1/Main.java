@@ -1,7 +1,6 @@
-package kiosk.koiskLv1;
+package kiosk.kioskLv1;
 
 import java.util.InputMismatchException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {

@@ -1,4 +1,4 @@
-package kiosk.koiskLv2;
+package kiosk.kioskLv2;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;

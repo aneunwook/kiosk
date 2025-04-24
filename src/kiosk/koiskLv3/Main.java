@@ -1,4 +1,4 @@
-package kiosk.koisk;
+package kiosk.koiskLv3;
 
 import java.util.ArrayList;
 import java.util.List;

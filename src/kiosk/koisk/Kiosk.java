@@ -29,8 +29,14 @@ public class Kiosk {
                 System.out.print("주문 번호: ");
                 menuNumber = scanner.nextInt();
 
-                System.out.println("**" + menuItemList.get(menuNumber - 1).name + " || " + menuItemList.get(menuNumber - 1).price + " || " + menuItemList.get(menuNumber - 1).explanation + "**\n");
+                if (menuNumber == 0) {
+                    System.out.println("종료되었습니다!");
+                    break;
+                } else if (menuNumber < 1 || menuNumber > 4) {
+                    throw new IndexOutOfBoundsException();
+                }
 
+                System.out.println("**" + menuItemList.get(menuNumber - 1).name + " || " + menuItemList.get(menuNumber - 1).price + " || " + menuItemList.get(menuNumber - 1).explanation + "**\n");
 
             } catch (InputMismatchException e) {
                 System.out.println("숫자로 입력해 주세요! ");

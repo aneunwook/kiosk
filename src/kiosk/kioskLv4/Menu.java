@@ -4,9 +4,9 @@ import java.util.List;
 
 public class Menu {
 
-    String category;
+    private String category;
 
-    List<MenuItem> menuItemList;
+    private List<MenuItem> menuItemList;
 
     public Menu(String category, List<MenuItem> menuItemList){
         this.category = category;
@@ -16,12 +16,16 @@ public class Menu {
     public void showMenuItem(){
         int id = 1;
         for(MenuItem item : menuItemList){
-            System.out.println(id++ + ". " + item.name + " || " + item.price + " || " + item.explanation);
+            System.out.println(id++ + ". " + item.getName() + " || " + item.getPrice() + " || " + item.getExplanation());
         }
     }
 
     public List<MenuItem> getMenuItemList() {
         return menuItemList;
+    }
+
+    public void addMenuItemList(MenuItem menuItem) {
+        this.menuItemList.add(menuItem);
     }
 
     public String getCategory() {

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    List<Menu> menus;
+    private List<Menu> menus;
 
     public Kiosk(List<Menu> menus) {
         this.menus = menus;
@@ -53,10 +53,10 @@ public class Kiosk {
                     int menuNumber = scanner.nextInt();
                     System.out.println();
 
-                    if(menuNumber >= 1 && menuNumber <= menus.get(menuListNumber - 1).menuItemList.size()){
+                    if(menuNumber >= 1 && menuNumber <= menus.get(menuListNumber - 1).getMenuItemList().size()){
                         Menu item = menus.get(menuListNumber - 1);
                         MenuItem menuItem = item.getMenuItemList().get(menuNumber - 1);
-                        System.out.println("**" + menuItem.name + " || " + menuItem.price + " || " + menuItem.explanation + "**\n");
+                        System.out.println("**" + menuItem.getName() + " || " + menuItem.getPrice() + " || " + menuItem.getExplanation() + "**\n");
                     }else if (menuNumber == 0) {
                         break;
                     }

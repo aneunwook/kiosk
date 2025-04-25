@@ -20,10 +20,10 @@ public class Main {
         MenuItem cheeseburger = new MenuItem("Cheeseburger", 6.9, "포테이토 번과 비프패티, 치즈가 토핑된 치즈버거");
         MenuItem hamburger = new MenuItem("Hamburger", 5.4, "비프패티를 기반으로 야채가 들어간 기본버거");
 
-        burgers.menuItemList.add(shackBurger);
-        burgers.menuItemList.add(smokeShack);
-        burgers.menuItemList.add(cheeseburger);
-        burgers.menuItemList.add(hamburger);
+        burgers.addMenuItemList(shackBurger);
+        burgers.addMenuItemList(smokeShack);
+        burgers.addMenuItemList(cheeseburger);
+        burgers.addMenuItemList(hamburger);
 
         MenuItem coke = new MenuItem("Coke", 2.0, "코카콜라");
         MenuItem iceAmericano = new MenuItem("IceAmericano", 4.0, "향이 좋은 원두");
@@ -31,19 +31,19 @@ public class Main {
         MenuItem latte = new MenuItem("Latte", 5.0, "따뜻해요");
         MenuItem sprite = new MenuItem("Sprite", 2.0, "시원해요");
 
-        drinks.menuItemList.add(coke);
-        drinks.menuItemList.add(iceAmericano);
-        drinks.menuItemList.add(icedTea);
-        drinks.menuItemList.add(latte);
-        drinks.menuItemList.add(sprite);
+        drinks.addMenuItemList(coke);
+        drinks.addMenuItemList(iceAmericano);
+        drinks.addMenuItemList(icedTea);
+        drinks.addMenuItemList(latte);
+        drinks.addMenuItemList(sprite);
 
         MenuItem cheeseStick = new MenuItem("CheeseStick", 2.5, "치즈가 흘러 넘쳐요");
         MenuItem iceCream = new MenuItem("iceCream", 2.9, "그냥 맛있어요");
         MenuItem bingSu = new MenuItem("BingSu", 7.9, "연유 많이 넣었어요");
 
-        desserts.menuItemList.add(cheeseStick);
-        desserts.menuItemList.add(iceCream);
-        desserts.menuItemList.add(bingSu);
+        desserts.addMenuItemList(cheeseStick);
+        desserts.addMenuItemList(iceCream);
+        desserts.addMenuItemList(bingSu);
 
         Kiosk kiosk = new Kiosk(menuList);
 

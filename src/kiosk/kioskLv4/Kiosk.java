@@ -35,22 +35,8 @@ public class Kiosk {
 
                 if (menuListNumber >= 1 && menuListNumber <= menus.size()) {
                     menus.get(menuListNumber - 1).showMenuItem();
-
-                System.out.println("0. 뒤로가기");
-
-
-//                if (menuListNumber >= 1 && menuListNumber <= menus.size()) {
-//                    for (int i = 0; i < menus.get(menuListNumber - 1).menuItemList.size(); i++) {
-//                        MenuItem menuItem = menus.get(menuListNumber - 1).menuItemList.get(i);
-//                        System.out.println(i + 1 + ". " + menuItem.name + " || " + menuItem.price + " || " + menuItem.explanation);
-//                    }
-//                    System.out.println("0. 뒤로가기");
-
-                } else if (menuListNumber == 0) {
-                    scanner.nextLine();
-                    continue;
+                    System.out.println("0. 뒤로가기");
                 }
-
             } catch (InputMismatchException e) {
                 System.out.println("숫자로 입력해 주세요! ");
                 scanner.nextLine();
@@ -68,16 +54,11 @@ public class Kiosk {
                     System.out.println();
 
                     if(menuNumber >= 1 && menuNumber <= menus.get(menuListNumber - 1).menuItemList.size()){
-
-                        Menu item = menus.get(menuNumber - 1);
+                        Menu item = menus.get(menuListNumber - 1);
                         MenuItem menuItem = item.getMenuItemList().get(menuNumber - 1);
                         System.out.println("**" + menuItem.name + " || " + menuItem.price + " || " + menuItem.explanation + "**\n");
-
-//                        MenuItem menuItem = menus.get(menuListNumber - 1).menuItemList.get(menuNumber - 1);
-//                        System.out.println("**" + menuItem.name + " || " + menuItem.price + " || " + menuItem.explanation + "**\n");
-                    }else {
-                        System.out.println("해당 음식은 없습니다!!\n");
-                        continue;
+                    }else if (menuNumber == 0) {
+                        break;
                     }
                     break;
                 }catch (InputMismatchException e) {

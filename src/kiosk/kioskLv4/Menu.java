@@ -13,6 +13,13 @@ public class Menu {
         this.menuItemList = menuItemList;
     }
 
+    public void showMenuItem(){
+        int id = 1;
+        for(MenuItem item : menuItemList){
+            System.out.println(id++ + ". " + item.name + " || " + item.price + " || " + item.explanation);
+        }
+    }
+
     public List<MenuItem> getMenuItemList() {
         return menuItemList;
     }

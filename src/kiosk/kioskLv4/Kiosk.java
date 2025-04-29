@@ -51,14 +51,15 @@ public class Kiosk {
                 int order = scanner.nextInt();
                 if (order == 1) {
                     System.out.println("주문이 완료되었습니다. 금액은 " + carts.get(0).getAmount() + " 입니다");
+                    return;
                 } else if (order == 2) {
                     continue;
                 }
-            }else if(menuListNumber == 5){
+            }else if(carts.size() >= 1 && menuListNumber == 5){
                 return;
             }
 
-                try {
+            try {
                 System.out.println();
                 System.out.println("[ " + menus.get(menuListNumber - 1).getCategory().toUpperCase() + " MENU ]");
 
@@ -75,7 +76,6 @@ public class Kiosk {
                 scanner.nextLine();
                 continue;
             }
-
 
             while (true){
                 try {

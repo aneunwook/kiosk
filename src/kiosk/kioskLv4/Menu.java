@@ -2,6 +2,8 @@ package kiosk.kioskLv4;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.IntStream;
 
 public class Menu {
 
@@ -15,10 +17,14 @@ public class Menu {
     }
 
     public void showMenuItem(){
-        int id = 1;
-        for(MenuItem item : menuItemList){
-            System.out.println(id++ + ". " + item.getName() + " || " + item.getPrice() + " || " + item.getExplanation());
-        }
+//        int id = 1;
+//        for(MenuItem item : menuItemList){
+//            System.out.println(id++ + ". " + item.getName() + " || " + item.getPrice() + " || " + item.getExplanation());
+//        }
+        AtomicInteger id = new AtomicInteger(1);
+        menuItemList.stream()
+                .map(item -> id.getAndIncrement() + ". " + item.getName() + " || " + item.getPrice() + " || " + item.getExplanation())
+                .forEach(System.out::println);
     }
 
     public List<MenuItem> getMenuItemList() {

@@ -10,7 +10,6 @@ public class Cart {
 
     public List<MenuItem> getCartItemList() {
         return cartItemList;
-
     }
 
     public void addCartItem(MenuItem menuItem) {
@@ -26,5 +25,6 @@ public class Cart {
     public double getAmount() {
         return amount;
     }
+
 
 }

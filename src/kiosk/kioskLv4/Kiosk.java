@@ -47,13 +47,26 @@ public class Kiosk {
                 }
                 System.out.println("\n[ Total ]\n" + "총 수량 : " + carts.get(0).getTotal() + " || 총 금액 : " + carts.get(0).getAmount());
 
-                System.out.println("1. 주문      2. 메뉴판");
+                System.out.println("1. 주문      2. 메뉴판      3. 장바구니 삭제");
                 int order = scanner.nextInt();
                 if (order == 1) {
+                    System.out.println("할인 정보를 입력해주세요.\n 1. 군인     :  30%\n 2. 학생     :  10%\n 3. 일반인     :  0%");
+                    int user = scanner.nextInt();
+
+                    switch (user){
+                        case 1 -> cart.setAmount(cart.discountedTotal(PersonType.SOLDIER));
+                        case 2 -> cart.setAmount(cart.discountedTotal(PersonType.STUDENT));
+                        case 3 -> cart.setAmount(cart.discountedTotal(PersonType.CIVILIAN));
+                    }
+
                     System.out.println("주문이 완료되었습니다. 금액은 " + carts.get(0).getAmount() + " 입니다");
                     return;
                 } else if (order == 2) {
                     continue;
+                } else if (order == 3) {
+                    System.out.print("삭제하고 싶은 메뉴를 선택해 주세요 : ");
+                    int remove = scanner.nextInt();
+                    cart.removeCart(carts.get(0).getCartItemList().get(remove - 1));
                 }
             }else if(carts.size() >= 1 && menuListNumber == 5){
                 return;

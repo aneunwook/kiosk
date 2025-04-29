@@ -1,27 +1,20 @@
 package kiosk.kioskLv4;
 
 public enum PersonType {
-    SOLDIER("군인"),
-    STUDENT("학생"),
-    CIVILIAN("일반인");
+    SOLDIER("군인", 30),
+    STUDENT("학생", 10),
+    CIVILIAN("일반인", 0);
 
     private final String person;
+    private final int discount;
 
-    PersonType(String person){
+    PersonType(String person, int discount){
         this.person = person;
+        this.discount = discount;
     }
 
-    public String getPerson() {
-        return person;
+    public int getDiscount() {
+        return discount;
     }
 
-    public int discount(PersonType personType){
-        if (personType == PersonType.SOLDIER){
-            return 30;
-        } else if (personType == PersonType.STUDENT) {
-            return 10;
-        } else {
-            return 0;
-        }
-    }
 }

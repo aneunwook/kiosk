@@ -17,10 +17,6 @@ public class Menu {
     }
 
     public void showMenuItem(){
-//        int id = 1;
-//        for(MenuItem item : menuItemList){
-//            System.out.println(id++ + ". " + item.getName() + " || " + item.getPrice() + " || " + item.getExplanation());
-//        }
         AtomicInteger id = new AtomicInteger(1);
         menuItemList.stream()
                 .map(item -> id.getAndIncrement() + ". " + item.getName() + " || " + item.getPrice() + " || " + item.getExplanation())

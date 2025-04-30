@@ -7,12 +7,10 @@ import java.util.Scanner;
 
 public class Kiosk {
     private List<Menu> menus;
-    private List<Cart> carts;
     Cart cart = new Cart();
 
     public Kiosk(List<Menu> menus) {
         this.menus = menus;
-        this.carts = new ArrayList<>();
     }
 
     public void start() {
@@ -40,13 +38,15 @@ public class Kiosk {
                 System.out.println("종료 되었습니다.");
                 return;
             }
-            if (menuListNumber == 4 && carts.size() >= 1) {
+            if (menuListNumber == 4) {
                 checkCart(scanner);
                 continue;
             }
 
-            if (carts.size() >= 1 && menuListNumber == 5) {
-                return;
+            if (menuListNumber == 5) {
+                cart = new Cart();
+                System.out.println("주문이 취소되었습니다.");
+                continue;
             }
 
             if (menuListNumber >= 1 && menuListNumber <= menus.size()) {
@@ -86,7 +86,6 @@ public class Kiosk {
 
                     if (cartNumber == 1) {
                         cart.addCartItem(menuItem);
-                        carts.add(cart);
                         System.out.println(menuItem.getName() + " 이 장바구니에 추가되었습니다.");
                         scanner.nextLine();
                         break;
@@ -113,10 +112,10 @@ public class Kiosk {
                 System.out.println("아래와 같이 주문 하시겠습니까?");
                 System.out.println("\n[ Orders ]");
                 int index = 1;
-                for (MenuItem cart : carts.get(0).getCartItemList()) {
+                for (MenuItem cart : cart.getCartItemList()) {
                     System.out.println(index++ + ". " + cart.getName() + " || " + cart.getPrice() + " || " + cart.getExplanation());
                 }
-                System.out.println("\n[ Total ]\n" + "총 수량 : " + carts.get(0).getTotal() + " || 총 금액 : " + carts.get(0).getAmount());
+                System.out.println("\n[ Total ]\n" + "총 수량 : " + cart.getTotal() + " || 총 금액 : " + cart.getAmount());
 
                 System.out.println("1. 주문      2. 메뉴판      3. 장바구니 삭제");
                 int order = scanner.nextInt();
@@ -148,7 +147,7 @@ public class Kiosk {
                         case 3 -> cart.setAmount(cart.discountedTotal(PersonType.CIVILIAN));
                     }
 
-                    System.out.println("주문이 완료되었습니다. 금액은 " + carts.get(0).getAmount() + " 입니다\n");
+                    System.out.println("주문이 완료되었습니다. 금액은 " + cart.getAmount() + " 입니다\n");
                     System.exit(0);
                 } else if (order == 2) {
                     return;
@@ -157,8 +156,8 @@ public class Kiosk {
                     int remove = scanner.nextInt();
                     scanner.nextLine();
 
-                    System.out.println(carts.get(0).getCartItemList().get(remove - 1).getName() + " 가 삭제 되었습니다!!\n");
-                    cart.removeCart(carts.get(0).getCartItemList().get(remove - 1));
+                    System.out.println(cart.getCartItemList().get(remove - 1).getName() + " 가 삭제 되었습니다!!\n");
+                    cart.removeCart(cart.getCartItemList().get(remove - 1));
                     return;
                 } else {
                     System.out.println("1 ~ 3" + " 까지만 선택해주세요! \n");

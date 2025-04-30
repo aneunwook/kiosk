@@ -7,8 +7,10 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        // 선택한 메뉴 번호를 저장할 변수
         int menuNumber;
 
+        // 메뉴 화면 출력
         while (true){
             System.out.println("[ SHAKESHACK MENU ]\n" +
                     "1. ShackBurger   | W 6.9 | 토마토, 양상추, 쉑소스가 토핑된 치즈버거\n" +
@@ -35,7 +37,6 @@ public class Main {
                 }
 
                 System.out.println();
-
 
             }catch (InputMismatchException e){
                 System.out.println("정수만 입력해 주세요! ");

@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        // 메뉴 항목들을 저장할 리스트 생성
         List<MenuItem> menuItemList = new ArrayList<>();
 
         MenuItem shackBurger = new MenuItem("ShackBurger", 6.9, "토마토, 양상추, 쉑소스가 토핑된 치즈버거");
@@ -20,9 +21,10 @@ public class Main {
         menuItemList.add(hamburger);
 
         Scanner scanner = new Scanner(System.in);
-        int menuNumber;
+        int menuNumber; // 입력 받은 메뉴 번호 저장
 
         while (true) {
+            // 메뉴 출력 (리스트 기반으로 동적으로 출력)
             for (int i = 0; i < menuItemList.size(); i++) {
                 MenuItem menuItem = menuItemList.get(i);
                 System.out.println(i + 1 + ". " + menuItem.name + " || " + menuItem.price + " || " + menuItem.explanation);
@@ -35,12 +37,14 @@ public class Main {
                 System.out.print("주문 번호: ");
                 menuNumber = scanner.nextInt();
 
+                // 1~4 외의 숫자 입력 시 예외 메시지
                 if (menuNumber < 1 || menuNumber > 4) {
                     System.out.println("1 ~ 4 까지만 선택하세요!\n");
                 } else {
                     System.out.println(menuNumber + "번 메뉴를 선택하셨습니다!");
                 }
 
+                // 선택된 메뉴 상세 출력 (직접 비교 방식)
                 if(menuNumber == 1){
                     System.out.println("**" + shackBurger.name + " || " + shackBurger.price + " || " + shackBurger.explanation + "**\n");
                 }else if(menuNumber == 2){

@@ -5,8 +5,9 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    List<MenuItem> menuItemList;
+    List<MenuItem> menuItemList; // 메뉴 리스트
 
+    // 생성자: 외부에서 메뉴 리스트 주입
     public Kiosk(List<MenuItem> menuItemList){
        this.menuItemList = menuItemList;
     }
@@ -16,6 +17,7 @@ public class Kiosk {
         int menuNumber;
 
         while (true) {
+            // 메뉴 목록 출력
             for (int i = 0; i < menuItemList.size(); i++) {
                 MenuItem menuItem = menuItemList.get(i);
                 System.out.println(i + 1 + ". " + menuItem.name + " || " + menuItem.price + " || " + menuItem.explanation);
@@ -30,9 +32,9 @@ public class Kiosk {
 
                 if (menuNumber == 0) {
                     System.out.println("종료되었습니다!");
-                    return;
+                    return; // 프로그램 종료
                 } else if (menuNumber < 1 || menuNumber > 4) {
-                    throw new IndexOutOfBoundsException();
+                    throw new IndexOutOfBoundsException(); // 잘못된 번호일 경우 예외 발생
                 }
 
                 System.out.println("**" + menuItemList.get(menuNumber - 1).name + " || " + menuItemList.get(menuNumber - 1).price + " || " + menuItemList.get(menuNumber - 1).explanation + "**\n");

@@ -6,13 +6,14 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Kiosk {
-    private List<Menu> menus;
-    Cart cart = new Cart();
+    private List<Menu> menus; // 메뉴 리스트
+    Cart cart = new Cart();  // 장바구니 객체
 
     public Kiosk(List<Menu> menus) {
         this.menus = menus;
     }
 
+    // 키오스크 프로그램을 실행하는 메소드
     public void start() {
         Scanner scanner = new Scanner(System.in);
 
@@ -20,12 +21,13 @@ public class Kiosk {
             try {
             System.out.println("[ MAIN MENU ]");
 
+            // 메뉴 카테고리 출력
             for (int i = 0; i < menus.size(); i++) {
                 System.out.println(i + 1 + " " + menus.get(i).getCategory());
             }
             System.out.println("0. 종료      | 종료");
 
-
+            // 장바구니에 아이템이 있을 경우 추가 옵션 제공
             if (cart.getCartItemList().size() >= 1) {
                 System.out.println("\n[ ORDER MENU ]");
                 System.out.println("4. Orders       | 장바구니를 확인 후 주문합니다 \n" + "5. Cancel       | 진행중인 주문을 취소합니다");
@@ -38,9 +40,11 @@ public class Kiosk {
                 System.out.println("종료 되었습니다.");
                 return;
             }
+
+            // 장바구니 확인
             if (menuListNumber == 4) {
-                checkCart(scanner);
-                continue;
+            checkCart(scanner);
+            continue;
             }
 
             if (menuListNumber == 5) {
@@ -49,8 +53,9 @@ public class Kiosk {
                 continue;
             }
 
+            // 선택된 메뉴가 유효하면 해당 메뉴를 선택한 상태로 넘어감
             if (menuListNumber >= 1 && menuListNumber <= menus.size()) {
-                selectedMenuItem(menuListNumber, scanner);
+            selectedMenuItem(menuListNumber, scanner);
             }
             } catch (InputMismatchException e) {
                 System.out.println("숫자로 입력해 주세요! ");
@@ -63,12 +68,14 @@ public class Kiosk {
         }
     }
 
+    // 특정 메뉴 항목을 선택한 후 처리하는 메소드
     private void selectedMenuItem(int menuListNumber, Scanner scanner) {
         while (true) {
             try {
                 System.out.println();
                 System.out.println("[ " + menus.get(menuListNumber - 1).getCategory().toUpperCase() + " MENU ]");
 
+                // 해당 메뉴 카테고리의 메뉴 항목들을 출력
                 menus.get(menuListNumber - 1).showMenuItem();
                 System.out.println("0. 뒤로가기");
 
@@ -84,6 +91,7 @@ public class Kiosk {
                     System.out.println("1. 확인        2. 취소");
                     int cartNumber = scanner.nextInt();
 
+                    // 장바구니에 추가할지 말지 결정
                     if (cartNumber == 1) {
                         cart.addCartItem(menuItem);
                         System.out.println(menuItem.getName() + " 이 장바구니에 추가되었습니다.");
@@ -106,6 +114,7 @@ public class Kiosk {
         }
     }
 
+    // 장바구니 확인 및 주문 옵션을 제공하는 메소드
     private void checkCart(Scanner scanner) {
         while (true) {
             try {
@@ -134,6 +143,7 @@ public class Kiosk {
         }
     }
 
+    // 주문 처리 및 유형 선택을 수행하는 메소드
     private void order (int order, Scanner scanner) {
         while (true) {
             try {
@@ -141,6 +151,7 @@ public class Kiosk {
                     System.out.println("할인 정보를 입력해주세요.\n 1. 군인     :  30%\n 2. 학생     :  10%\n 3. 일반인     :  0%");
                     int user = scanner.nextInt();
 
+                    // 유형에 따른 할인 적용
                     switch (user) {
                         case 1 -> cart.setAmount(cart.discountedTotal(PersonType.SOLDIER));
                         case 2 -> cart.setAmount(cart.discountedTotal(PersonType.STUDENT));

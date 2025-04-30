@@ -49,12 +49,7 @@ public class Kiosk {
                 return;
             }
 
-            System.out.println();
-            System.out.println("[ " + menus.get(menuListNumber - 1).getCategory().toUpperCase() + " MENU ]");
-
             if (menuListNumber >= 1 && menuListNumber <= menus.size()) {
-                menus.get(menuListNumber - 1).showMenuItem();
-                System.out.println("0. 뒤로가기");
                 selectedMenuItem(menuListNumber, scanner);
             }
             } catch (InputMismatchException e) {
@@ -68,69 +63,15 @@ public class Kiosk {
         }
     }
 
-    private void checkCart(Scanner scanner) {
-        try {
-            System.out.println("아래와 같이 주문 하시겠습니까?");
-            System.out.println("\n[ Orders ]");
-            int index = 1;
-            for (MenuItem cart : carts.get(0).getCartItemList()) {
-                System.out.println(index++ + ". " + cart.getName() + " || " + cart.getPrice() + " || " + cart.getExplanation());
-            }
-            System.out.println("\n[ Total ]\n" + "총 수량 : " + carts.get(0).getTotal() + " || 총 금액 : " + carts.get(0).getAmount());
-
-            System.out.println("1. 주문      2. 메뉴판      3. 장바구니 삭제");
-            int order = scanner.nextInt();
-            order(order,scanner);
-        }catch (InputMismatchException e) {
-            System.out.println("숫자로 입력해 주세요! ");
-            scanner.nextLine();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("1 ~ 3" + " 까지만 선택해주세요! \n");
-            scanner.nextLine();
-        }
-
-    }
-
-    private void order (int order, Scanner scanner) {
-        try{
-            if (order == 1) {
-                System.out.println("할인 정보를 입력해주세요.\n 1. 군인     :  30%\n 2. 학생     :  10%\n 3. 일반인     :  0%");
-                int user = scanner.nextInt();
-
-                switch (user) {
-                    case 1 -> cart.setAmount(cart.discountedTotal(PersonType.SOLDIER));
-                    case 2 -> cart.setAmount(cart.discountedTotal(PersonType.STUDENT));
-                    case 3 -> cart.setAmount(cart.discountedTotal(PersonType.CIVILIAN));
-                }
-
-                System.out.println("주문이 완료되었습니다. 금액은 " + carts.get(0).getAmount() + " 입니다\n");
-                cart = new Cart();
-                carts.clear();
-                return;
-            } else if (order == 2) {
-                return;
-            }
-            if (order == 3) {
-                System.out.print("삭제하고 싶은 메뉴를 선택해 주세요 : ");
-                int remove = scanner.nextInt();
-                scanner.nextLine();
-
-                System.out.println(carts.get(0).getCartItemList().get(remove - 1).getName() + " 가 삭제 되었습니다!!\n");
-                cart.removeCart(carts.get(0).getCartItemList().get(remove - 1));
-            }
-        } catch (InputMismatchException e) {
-            System.out.println("숫자로 입력해 주세요! ");
-            scanner.nextLine();
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println("1 ~ 3" + " 까지만 선택해주세요! \n");
-            scanner.nextLine();
-        }
-
-    }
-
     private void selectedMenuItem(int menuListNumber, Scanner scanner) {
         while (true) {
             try {
+                System.out.println();
+                System.out.println("[ " + menus.get(menuListNumber - 1).getCategory().toUpperCase() + " MENU ]");
+
+                menus.get(menuListNumber - 1).showMenuItem();
+                System.out.println("0. 뒤로가기");
+
                 System.out.print("음식을 선택해 주세요: ");
                 int menuNumber = scanner.nextInt();
                 System.out.println();
@@ -142,23 +83,88 @@ public class Kiosk {
                     System.out.println("위 메뉴를 장바구니에 추가 하시겠습니까?");
                     System.out.println("1. 확인        2. 취소");
                     int cartNumber = scanner.nextInt();
-                    scanner.nextLine();
 
                     if (cartNumber == 1) {
                         cart.addCartItem(menuItem);
                         carts.add(cart);
                         System.out.println(menuItem.getName() + " 이 장바구니에 추가되었습니다.");
+                        scanner.nextLine();
+                        break;
+                    }else if(cartNumber == 2){
+                        break;
+                    }else {
+                        System.out.println("1 ~ 2 까지만 선택해주세요!");
                     }
+                }else if (menuNumber == 0) {
                     break;
-
-                } else if (menuNumber == 0) {
-                    break;
+                }else {
+                    System.out.println("1 ~ " + menus.get(menuListNumber - 1).getMenuItemList().size() + " 까지만 선택해주세요!");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("숫자로 입력해 주세요! ");
                 scanner.nextLine();
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println("1 ~ " + menus.get(menuListNumber - 1) + " 까지만 선택해주세요! \n");
+            }
+        }
+    }
+
+    private void checkCart(Scanner scanner) {
+        while (true) {
+            try {
+                System.out.println("아래와 같이 주문 하시겠습니까?");
+                System.out.println("\n[ Orders ]");
+                int index = 1;
+                for (MenuItem cart : carts.get(0).getCartItemList()) {
+                    System.out.println(index++ + ". " + cart.getName() + " || " + cart.getPrice() + " || " + cart.getExplanation());
+                }
+                System.out.println("\n[ Total ]\n" + "총 수량 : " + carts.get(0).getTotal() + " || 총 금액 : " + carts.get(0).getAmount());
+
+                System.out.println("1. 주문      2. 메뉴판      3. 장바구니 삭제");
+                int order = scanner.nextInt();
+
+                if (order >= 1 && order <= 3) {
+                    order(order, scanner);
+                    break;
+                } else {
+                    System.out.println("1 ~ 3 까지만 선택해주세요! \n");
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("숫자로 입력해 주세요! ");
+                scanner.nextLine();
+            }
+        }
+    }
+
+    private void order (int order, Scanner scanner) {
+        while (true) {
+            try {
+                if (order == 1) {
+                    System.out.println("할인 정보를 입력해주세요.\n 1. 군인     :  30%\n 2. 학생     :  10%\n 3. 일반인     :  0%");
+                    int user = scanner.nextInt();
+
+                    switch (user) {
+                        case 1 -> cart.setAmount(cart.discountedTotal(PersonType.SOLDIER));
+                        case 2 -> cart.setAmount(cart.discountedTotal(PersonType.STUDENT));
+                        case 3 -> cart.setAmount(cart.discountedTotal(PersonType.CIVILIAN));
+                    }
+
+                    System.out.println("주문이 완료되었습니다. 금액은 " + carts.get(0).getAmount() + " 입니다\n");
+                    System.exit(0);
+                } else if (order == 2) {
+                    return;
+                }else if (order == 3) {
+                    System.out.print("삭제하고 싶은 메뉴를 선택해 주세요 : ");
+                    int remove = scanner.nextInt();
+                    scanner.nextLine();
+
+                    System.out.println(carts.get(0).getCartItemList().get(remove - 1).getName() + " 가 삭제 되었습니다!!\n");
+                    cart.removeCart(carts.get(0).getCartItemList().get(remove - 1));
+                    return;
+                } else {
+                    System.out.println("1 ~ 3" + " 까지만 선택해주세요! \n");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("숫자로 입력해 주세요! ");
                 scanner.nextLine();
             }
         }
